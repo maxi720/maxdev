@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quizapp — verfügbar im App Store und Google Play Store.">
+  <meta name="robots" content="index, follow">
+  <!-- No external resources — DSGVO/GDPR compliant -->
+  <title>Quizapp — maxdev</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .store-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      margin: var(--space-12) 0;
+      max-width: 560px;
+    }
+
+    .store-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      background: var(--color-bg-surface);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-8) var(--space-6);
+      transition: border-color var(--transition-fast);
+    }
+    .store-card:hover {
+      border-color: var(--color-accent-dim);
+    }
+
+    .store-card__qr {
+      width: 160px;
+      height: 160px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Placeholder QR — will be replaced with real <img> later */
+    .qr-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg-elevated);
+      border: var(--border-width) dashed var(--color-border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      text-align: center;
+      padding: var(--space-4);
+    }
+    .qr-placeholder svg {
+      opacity: 0.4;
+    }
+
+    .store-card__name {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .app-description {
+      max-width: 560px;
+      border-top: var(--border-width) solid var(--color-border);
+      padding-top: var(--space-8);
+      margin-top: var(--space-4);
+    }
+    .app-description p {
+      max-width: 56ch;
+    }
+
+    @media (max-width: 480px) {
+      .store-grid {
+        grid-template-columns: 1fr;
+        max-width: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+  <header>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <div class="site-nav__inner">
+        <a href="index.html" class="site-nav__brand" aria-label="maxdev Startseite">maxdev</a>
+        <a href="vps.html" class="nav-link">VPS</a>
+        <a href="quizapp.html" class="nav-link" aria-current="page">Quizapp</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="site-main">
+
+    <div class="page-header">
+      <h1 class="page-title">Quizapp</h1>
+      <p class="page-subtitle">
+        Jetzt herunterladen — verfügbar für iOS und Android.
+      </p>
+    </div>
+
+    <div class="store-grid">
+
+      <!-- App Store -->
+      <div class="store-card">
+        <div class="store-card__qr">
+          <!-- QR-Code Platzhalter — wird später durch ein <img> ersetzt -->
+          <div class="qr-placeholder" aria-label="QR-Code App Store (Platzhalter)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="3" height="3" rx="0.5"/>
+              <rect x="19" y="14" width="2" height="2" rx="0.5"/>
+              <rect x="14" y="19" width="2" height="2" rx="0.5"/>
+              <rect x="18" y="18" width="3" height="3" rx="0.5"/>
+            </svg>
+            QR-Code
+          </div>
+        </div>
+        <span class="store-card__name">App Store</span>
+      </div>
+
+      <!-- Play Store -->
+      <div class="store-card">
+        <div class="store-card__qr">
+          <!-- QR-Code Platzhalter — wird später durch ein <img> ersetzt -->
+          <div class="qr-placeholder" aria-label="QR-Code Play Store (Platzhalter)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="3" height="3" rx="0.5"/>
+              <rect x="19" y="14" width="2" height="2" rx="0.5"/>
+              <rect x="14" y="19" width="2" height="2" rx="0.5"/>
+              <rect x="18" y="18" width="3" height="3" rx="0.5"/>
+            </svg>
+            QR-Code
+          </div>
+        </div>
+        <span class="store-card__name">Play Store</span>
+      </div>
+
+    </div>
+
+    <!-- App Description -->
+    <div class="app-description">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+        porttitor est vitae velit tincidunt, vel consequat nulla facilisis.
+        Die Quizapp bietet spannende Fragen aus verschiedenen Kategorien —
+        ideal für Freizeit, Schule und Wettbewerbe.
+      </p>
+      <p>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium. Verfügbar für iOS ab Version 15
+        und Android ab Version 8.0.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__copy">&copy; 2026 maxdev</span>
+      <nav class="site-footer__links" aria-label="Legal navigation">
+        <a href="impressum.html">Impressum</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

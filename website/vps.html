@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A practical, step-by-step guide to hardening a fresh VPS — SSH, firewall, Fail2Ban, and more.">
+  <meta name="robots" content="index, follow">
+  <!-- No external resources — DSGVO/GDPR compliant -->
+  <title>VPS Security — maxdev</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="site-nav" aria-label="Main navigation">
+      <div class="site-nav__inner">
+        <a href="index.html" class="site-nav__brand" aria-label="maxdev home">maxdev</a>
+        <a href="vps.html" class="nav-link" aria-current="page">VPS</a>
+        <a href="quizapp.html" class="nav-link">Quizapp</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="site-main">
+
+    <div class="page-header">
+      <h1 class="page-title">Secure Your VPS</h1>
+      <p class="page-subtitle">
+        A step-by-step guide to hardening a fresh virtual private server.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit — quisque vel
+        nibh vitae risus pellentesque gravida.
+      </p>
+    </div>
+
+    <!-- ── Section 1: Initial Setup ──────────────────────── -->
+    <h2 id="initial-setup">Initial Setup</h2>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel
+      nibh vitae risus pellentesque gravida. Before anything else, bring all
+      installed packages up to date so that known security vulnerabilities
+      are patched immediately.
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: update and upgrade packages">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy update command to clipboard"
+                data-copy="sudo apt update && sudo apt upgrade -y">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
+      </div>
+    </div>
+
+    <p>
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+      accusantium doloremque laudantium, totam rem aperiam. Create a
+      dedicated non-root user with <code>sudo</code> privileges immediately
+      after first login — never operate as root day-to-day.
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: create sudo user">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy create user command to clipboard"
+                data-copy="adduser deploy && usermod -aG sudo deploy">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>adduser deploy
+<span class="prompt">$ </span>usermod -aG sudo deploy</code></pre>
+      </div>
+    </div>
+
+    <!-- ── Section 2: SSH Hardening ──────────────────────── -->
+    <h2 id="ssh-hardening">SSH Hardening</h2>
+
+    <p>
+      At vero eos et accusamus et iusto odio dignissimos ducimus qui
+      blanditiis praesentium voluptatum deleniti atque. Disable root login
+      and password-based authentication — only SSH key pairs should be
+      accepted.
+    </p>
+
+    <div class="callout callout--warning">
+      <strong>⚠ Important:</strong> Copy your SSH public key to the server
+      <strong>before</strong> disabling password authentication. If you skip
+      this step you will lock yourself out completely.
+    </div>
+
+    <div class="cmd-block" role="region" aria-label="Command: copy SSH public key (run on local machine)">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash — local machine</span>
+        <button class="copy-btn"
+                aria-label="Copy ssh-copy-id command to clipboard"
+                data-copy="ssh-copy-id -i ~/.ssh/id_ed25519.pub deploy@YOUR_SERVER_IP">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>ssh-copy-id -i ~/.ssh/id_ed25519.pub deploy@YOUR_SERVER_IP</code></pre>
+      </div>
+    </div>
+
+    <p>
+      Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+      fugit. Edit <code>/etc/ssh/sshd_config</code> to disable root login
+      and password authentication, then reload the SSH daemon.
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: harden sshd_config">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy sshd hardening commands to clipboard"
+                data-copy="sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo systemctl restart sshd">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+<span class="prompt">$ </span>sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+<span class="prompt">$ </span>sudo systemctl restart sshd</code></pre>
+      </div>
+    </div>
+
+    <!-- ── Section 3: Firewall ────────────────────────────── -->
+    <h2 id="firewall">Firewall with UFW</h2>
+
+    <p>
+      Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+      quam nihil molestiae consequatur, vel illum qui dolorem eum. Enable
+      UFW (Uncomplicated Firewall) and allow only the ports your services
+      actually require — deny everything else by default.
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: configure UFW firewall">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy UFW setup commands to clipboard"
+                data-copy="sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo ufw default deny incoming
+<span class="prompt">$ </span>sudo ufw default allow outgoing
+<span class="prompt">$ </span>sudo ufw allow ssh
+<span class="prompt">$ </span>sudo ufw allow 80/tcp
+<span class="prompt">$ </span>sudo ufw allow 443/tcp
+<span class="prompt">$ </span>sudo ufw enable</code></pre>
+      </div>
+    </div>
+
+    <p>
+      Ut labore et dolore magnam aliquam quaerat voluptatem. Verify the
+      rules are active with the following command:
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: check UFW status">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy ufw status command to clipboard"
+                data-copy="sudo ufw status verbose">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo ufw status verbose</code></pre>
+      </div>
+    </div>
+
+    <!-- ── Section 4: Fail2Ban ────────────────────────────── -->
+    <h2 id="fail2ban">Fail2Ban — Brute-Force Protection</h2>
+
+    <p>
+      Nam libero tempore cum soluta nobis est eligendi optio cumque nihil
+      impedit quo minus id quod maxime placeat facere possimus. Fail2Ban
+      scans log files and bans IP addresses that show malicious signs such
+      as repeated failed login attempts.
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: install and enable Fail2Ban">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy Fail2Ban install commands to clipboard"
+                data-copy="sudo apt install fail2ban -y
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo apt install fail2ban -y
+<span class="prompt">$ </span>sudo systemctl enable fail2ban
+<span class="prompt">$ </span>sudo systemctl start fail2ban</code></pre>
+      </div>
+    </div>
+
+    <p>
+      Temporibus autem quibusdam et aut officiis debitis aut rerum
+      necessitatibus saepe eveniet. Check that the SSH jail is active and
+      review currently banned addresses:
+    </p>
+
+    <div class="cmd-block" role="region" aria-label="Command: check Fail2Ban SSH jail status">
+      <div class="cmd-block__header">
+        <span class="cmd-block__label">bash</span>
+        <button class="copy-btn"
+                aria-label="Copy Fail2Ban status command to clipboard"
+                data-copy="sudo fail2ban-client status sshd">
+          Copy
+        </button>
+      </div>
+      <div class="cmd-block__body">
+        <pre><code><span class="prompt">$ </span>sudo fail2ban-client status sshd</code></pre>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__copy">&copy; 2026 maxdev</span>
+      <nav class="site-footer__links" aria-label="Legal navigation">
+        <a href="impressum.html">Impressum</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* Copy-to-clipboard — inline, zero dependencies, GDPR safe */
+    (function () {
+      'use strict';
+
+      if (!navigator.clipboard) return;
+
+      var RESET_MS = 2000;
+
+      document.querySelectorAll('.copy-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var text = btn.getAttribute('data-copy');
+          if (!text) return;
+
+          navigator.clipboard.writeText(text).then(function () {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copy-btn--success');
+            setTimeout(function () {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copy-btn--success');
+            }, RESET_MS);
+          }).catch(function () {
+            btn.textContent = 'Error';
+            setTimeout(function () { btn.textContent = 'Copy'; }, RESET_MS);
+          });
+        });
+      });
+    }());
+  </script>
+
+</body>
+</html>
