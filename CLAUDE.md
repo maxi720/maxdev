@@ -11,7 +11,7 @@ Liegt in `website/` — 100 % statisch, kein Build-Tool, kein Framework.
 
 | Datei | Zweck |
 |---|---|
-| `website/index.html` | Startseite mit Projektkarten-Übersicht |
+| `website/index.html` | Startseite mit Projektkarten-Übersicht (VPS, Quizapp, Skills) |
 | `website/vps.html` | VPS-Sicherheits-Guide mit Copy-to-Clipboard-Befehlen |
 | `website/quizapp.html` | Quizapp-Seite (QR-Codes App Store / Play Store + Beschreibung) |
 | `website/skills.html` | Skills-Seite (Download der Datenschutz-Skills) |
