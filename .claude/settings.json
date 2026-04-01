@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_AUT /Users/maxi/development/Projects/maxdev/.agents/skills/datenschutz-oesterreich)",
+      "Bash(cp -r /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_DE /Users/maxi/development/Projects/maxdev/.agents/skills/datenschutz-deutschland)",
+      "Bash(mv /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_AUT/datenschutz-oesterreich.skill /Users/maxi/development/Projects/maxdev/website/datenschutz-oesterreich.skill)",
+      "Bash(mv /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_DE/datenschutz-deutschland.skill /Users/maxi/development/Projects/maxdev/website/datenschutz-deutschland.skill)",
+      "Bash(rm -rf /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_AUT /Users/maxi/development/Projects/maxdev/SKILL_DSGVO_DE)"
+    ]
+  }
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="maxdev — Claude Code Skills zum Download.">
+  <meta name="robots" content="index, follow">
+  <!-- No external resources — DSGVO/GDPR compliant -->
+  <title>Skills — maxdev</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+
+    .skill-card {
+      background: var(--color-bg-surface);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent-dim);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      transition: border-left-color var(--transition-fast),
+                  border-color var(--transition-fast);
+    }
+    .skill-card:hover {
+      border-left-color: var(--color-accent);
+      border-color: var(--color-accent-dim);
+    }
+
+    .skill-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .skill-card__tag {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .skill-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: var(--line-height-tight);
+      margin-top: var(--space-1);
+    }
+
+    .skill-card__desc {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      flex: 1;
+      margin: 0;
+      max-width: none;
+    }
+
+    .skill-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .skill-badge {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      color: var(--color-cyan);
+      background: rgba(0, 229, 204, 0.07);
+      border: var(--border-width) solid var(--color-cyan-dim);
+      border-radius: var(--radius-sm);
+      padding: var(--space-1) var(--space-2);
+      white-space: nowrap;
+    }
+
+    .skill-card__actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--color-text-inverse);
+      background: var(--color-accent);
+      border: var(--border-width) solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-4);
+      transition: background var(--transition-fast), opacity var(--transition-fast);
+      cursor: pointer;
+    }
+    .btn-download:hover {
+      background: #2de073;
+      border-color: #2de073;
+      color: var(--color-text-inverse);
+      text-decoration: none;
+      opacity: 1;
+    }
+    .btn-download:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      text-decoration: none;
+      color: var(--color-text-muted);
+      background: transparent;
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-4);
+      transition: color var(--transition-fast), border-color var(--transition-fast);
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent-dim);
+      text-decoration: none;
+    }
+
+    /* Install instructions box */
+    .install-box {
+      background: var(--color-bg-surface);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin-top: var(--space-12);
+      max-width: 640px;
+    }
+    .install-box h2 {
+      margin-top: 0;
+      border: none;
+      padding: 0;
+      font-size: var(--font-size-lg);
+    }
+    .install-box h2::before { content: ""; }
+    .install-box p { margin-bottom: var(--space-3); }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+  <header>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <div class="site-nav__inner">
+        <a href="index.html" class="site-nav__brand" aria-label="maxdev Startseite">maxdev</a>
+        <a href="vps.html" class="nav-link">VPS</a>
+        <a href="quizapp.html" class="nav-link">Quizapp</a>
+        <a href="skills.html" class="nav-link" aria-current="page">Skills</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="site-main">
+
+    <div class="page-header">
+      <h1 class="page-title">Skills</h1>
+      <p class="page-subtitle">
+        Claude Code Skills zum Download — Datenschutz-Experten für Österreich und Deutschland.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Skill: Datenschutz Österreich -->
+      <div class="skill-card">
+        <div>
+          <div class="skill-card__tag">Datenschutz · Österreich</div>
+          <div class="skill-card__title">DSGVO + DSG</div>
+        </div>
+        <p class="skill-card__desc">
+          Datenschutz-Skill für Österreich: DSGVO kombiniert mit den österreichischen
+          Besonderheiten des DSG — Datenschutzbehörde (DSB), Einwilligungsalter 14 Jahre,
+          Videoüberwachung, Verwaltungsstrafen und mehr.
+        </p>
+        <div class="skill-card__meta">
+          <span class="skill-badge">DSGVO</span>
+          <span class="skill-badge">DSG</span>
+          <span class="skill-badge">DSB</span>
+          <span class="skill-badge">Claude Code</span>
+        </div>
+        <div class="skill-card__actions">
+          <a href="downloads/datenschutz-oesterreich.skill"
+             download="datenschutz-oesterreich.skill"
+             class="btn-download"
+             aria-label="Skill Datenschutz Österreich herunterladen">
+            ↓ Download
+          </a>
+        </div>
+      </div>
+
+      <!-- Skill: Datenschutz Deutschland -->
+      <div class="skill-card">
+        <div>
+          <div class="skill-card__tag">Datenschutz · Deutschland</div>
+          <div class="skill-card__title">DSGVO + BDSG + TTDSG</div>
+        </div>
+        <p class="skill-card__desc">
+          Datenschutz-Skill für Deutschland: DSGVO, BDSG und TTDSG — inklusive
+          16 Landesaufsichtsbehörden, Beschäftigtendatenschutz (§ 26 BDSG),
+          Cookies nach TTDSG, DSB-Pflicht ab 20 Personen und mehr.
+        </p>
+        <div class="skill-card__meta">
+          <span class="skill-badge">DSGVO</span>
+          <span class="skill-badge">BDSG</span>
+          <span class="skill-badge">TTDSG</span>
+          <span class="skill-badge">Claude Code</span>
+        </div>
+        <div class="skill-card__actions">
+          <a href="downloads/datenschutz-deutschland.skill"
+             download="datenschutz-deutschland.skill"
+             class="btn-download"
+             aria-label="Skill Datenschutz Deutschland herunterladen">
+            ↓ Download
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Installation instructions -->
+    <div class="install-box">
+      <h2>Installation</h2>
+      <p>Die <code>.skill</code>-Datei herunterladen und in einem Projekt-Ordner ablegen:</p>
+
+      <div class="cmd-block" role="region" aria-label="Befehl: Skill installieren">
+        <div class="cmd-block__header">
+          <span class="cmd-block__label">bash</span>
+          <button class="copy-btn"
+                  aria-label="Install-Befehl kopieren"
+                  data-copy="claude skill install ./datenschutz-oesterreich.skill">
+            Copy
+          </button>
+        </div>
+        <div class="cmd-block__body">
+          <pre><code><span class="prompt">$ </span>claude skill install ./datenschutz-oesterreich.skill</code></pre>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-2); margin-bottom: 0;">
+        Danach steht der Skill in Claude Code automatisch zur Verfügung.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__copy">&copy; 2026 maxdev</span>
+      <nav class="site-footer__links" aria-label="Legal navigation">
+        <a href="impressum.html">Impressum</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      if (!navigator.clipboard) return;
+      var RESET_MS = 2000;
+      document.querySelectorAll('.copy-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var text = btn.getAttribute('data-copy');
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(function () {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copy-btn--success');
+            setTimeout(function () {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copy-btn--success');
+            }, RESET_MS);
+          }).catch(function () {
+            btn.textContent = 'Error';
+            setTimeout(function () { btn.textContent = 'Copy'; }, RESET_MS);
+          });
+        });
+      });
+    }());
+  </script>
+
+</body>
+</html>

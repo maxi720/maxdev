@@ -6,15 +6,20 @@
       "sourceType": "github",
       "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
     },
-    "gdpr-dsgvo-expert": {
-      "source": "davila7/claude-code-templates",
-      "sourceType": "github",
-      "computedHash": "34947e384b2c0427e27a902324fe9aa42634b488a0bd64ba68432f5fc66712f6"
-    },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "computedHash": "0a413bf988d06481f69bb81df2070741c3ba12dd9f1be2706d57f259c905992d"
+    },
+    "datenschutz-oesterreich": {
+      "source": "local",
+      "sourceType": "local",
+      "path": "website/downloads/datenschutz-oesterreich.skill"
+    },
+    "datenschutz-deutschland": {
+      "source": "local",
+      "sourceType": "local",
+      "path": "website/downloads/datenschutz-deutschland.skill"
     }
   }
 }
